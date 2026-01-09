@@ -11,7 +11,7 @@ if($username == "" || $password == ""){
     exit;
 }
 
-$stmt = mysqli_prepare($conn, "SELECT user_id, password, role FROM users WHERE username = ?");
+$stmt = mysqli_prepare($conn, "SELECT user_id, password, role, username FROM users WHERE username = ?");
 
 mysqli_stmt_bind_param($stmt, "s", $username);
 
@@ -33,6 +33,7 @@ if( password_verify( $password, $row['password'] ) )
     session_start();
 
     $_SESSION["userID"] = $row['user_id'];
+    $_SESSION["username"] = $row["username"];
     $_SESSION["role"] = $row["role"];
 
     header("Location: ../../home/", true, 301);

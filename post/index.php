@@ -28,12 +28,11 @@ require_once("../components/backButton.php");
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <? echo mysqli_num_rows($result); ?>
     
-    <?php heading("Post"); ?>
+    <?php heading("Post " . $post["post_id"]); ?>
 
     <main>
-            <?php showPost($post); ?>
+            <?php showPostSite($post); ?>
             <?php backButton(); ?>
     </main>
 

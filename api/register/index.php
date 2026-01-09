@@ -36,7 +36,7 @@ $stmt = mysqli_prepare($conn, "INSERT INTO users (username, password) VALUES (?,
 mysqli_stmt_bind_param($stmt, "ss", $username, $hashedPassword);
 mysqli_stmt_execute($stmt);
 
-$stmt = mysqli_prepare($conn, "SELECT user_id FROM users WHERE username = ?");
+$stmt = mysqli_prepare($conn, "SELECT user_id, role, username FROM users WHERE username = ?");
 mysqli_stmt_bind_param($stmt, "s", $username);
 mysqli_stmt_execute($stmt);
 
@@ -44,10 +44,10 @@ $result = mysqli_stmt_get_result($stmt);
 
 $row = mysqli_fetch_assoc($result);
 
-$userID = $row['user_id'];
-
 session_start();
-$_SESSION["userID"] = $userID;
+$_SESSION["userID"] = $row['user_id'];
+$_SESSION["username"] = $row['username'];
+$_SESSION["role"] = $row['role'];
 
 mysqli_close($conn);
 
